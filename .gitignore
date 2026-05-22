@@ -1,1 +1,3 @@
 data/
+.env
+sync.log

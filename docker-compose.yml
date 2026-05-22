@@ -21,6 +21,12 @@ services:
       ENABLED_LINKED_FILE_TYPES: "project_file,project_output_file"
       ENABLE_CONVERSIONS: "true"
       EMAIL_CONFIRMATION_DISABLED: "true"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost/login"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+      start_period: 60s
 
   mongo:
     restart: always
@@ -46,3 +52,18 @@ services:
     container_name: redis
     volumes:
       - ./data/redis:/data
+
+  sync:
+    build: ./docker/sync
+    container_name: overleaf-sync
+    restart: unless-stopped
+    user: "${DOCKER_UID:-1000}:${DOCKER_GID:-1000}"
+    volumes:
+      - ./:/repo
+    env_file:
+      - .env
+    environment:
+      OVERLEAF_URL: http://sharelatex
+    depends_on:
+      sharelatex:
+        condition: service_healthy
