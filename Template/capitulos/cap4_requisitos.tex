@@ -1,0 +1,185 @@
+% =============================================================================
+%  capitulos/cap4_requisitos.tex
+%  CAPÍTULO 4 — REQUISITOS E MODELAGEM DO SISTEMA
+%
+%  Objetivo: provar que o sistema foi planejado com rigor de engenharia.
+%  Aqui você demonstra a diferença entre "programador" e "engenheiro".
+%
+%  Contém: Requisitos Funcionais (RF), Requisitos Não Funcionais (RNF)
+%          e os principais Diagramas UML.
+% =============================================================================
+
+\chapter{Requisitos e Modelagem do Sistema}
+\label{cap:requisitos}
+
+TODO: Parágrafo introdutório do capítulo, explicando como os requisitos
+foram levantados (técnica utilizada: entrevistas, questionários, análise
+de sistemas similares, etc.) e o que será apresentado nas próximas seções.
+
+
+% -----------------------------------------------------------------------------
+%  4.1 REQUISITOS FUNCIONAIS (RF)
+%  Descrevem O QUE o sistema faz — funcionalidades observáveis pelo usuário.
+%  Convenção de numeração: RF01, RF02... ou RF-001, RF-002...
+%  Prioridade: Alta / Média / Baixa  (ou MoSCoW: Must / Should / Could / Won't)
+% -----------------------------------------------------------------------------
+\section{Requisitos Funcionais}
+\label{sec:requisitos-funcionais}
+
+Os requisitos funcionais descrevem as funcionalidades que o sistema deve
+oferecer aos seus usuários. A \cref{tab:rf} apresenta os requisitos
+funcionais levantados durante a fase de análise.
+
+\begin{table}[H]
+  \caption{Requisitos Funcionais do Sistema}
+  \label{tab:rf}
+  \centering
+  % Ajuste as colunas conforme necessário. X = coluna de largura flexível.
+  \begin{tabularx}{\textwidth}{llXl}
+    \toprule
+    \textbf{ID}   & \textbf{Nome}        & \textbf{Descrição}
+                  & \textbf{Prioridade}  \\
+    \midrule
+    RF01 & TODO: Nome curto & TODO: O sistema deve permitir que o
+           usuário [ação]...                    & Alta   \\
+    RF02 & TODO: Nome curto & TODO: O sistema deve [ação]...
+                                                & Alta   \\
+    RF03 & TODO: Nome curto & TODO: O sistema deve [ação]...
+                                                & Média  \\
+    RF04 & TODO: Nome curto & TODO: O sistema deve [ação]...
+                                                & Média  \\
+    RF05 & TODO: Nome curto & TODO: O sistema deve [ação]...
+                                                & Baixa  \\
+    % Adicione quantas linhas forem necessárias
+    \bottomrule
+  \end{tabularx}
+  \fonte{Elaborado pelo autor.}
+\end{table}
+
+
+% -----------------------------------------------------------------------------
+%  4.2 REQUISITOS NÃO FUNCIONAIS (RNF)
+%  Descrevem COMO o sistema se comporta: performance, segurança,
+%  usabilidade, disponibilidade, manutenibilidade, escalabilidade...
+%  Sempre que possível, inclua uma métrica mensurável na coluna "Critério".
+% -----------------------------------------------------------------------------
+\section{Requisitos Não Funcionais}
+\label{sec:requisitos-nao-funcionais}
+
+Os requisitos não funcionais definem restrições de qualidade e
+comportamento do sistema. A \cref{tab:rnf} apresenta os requisitos não
+funcionais identificados.
+
+\begin{table}[H]
+  \caption{Requisitos Não Funcionais do Sistema}
+  \label{tab:rnf}
+  \centering
+  \begin{tabularx}{\textwidth}{llXl}
+    \toprule
+    \textbf{ID}  & \textbf{Categoria}   & \textbf{Descrição}
+                 & \textbf{Critério}    \\
+    \midrule
+    RNF01 & Performance   & TODO: O sistema deve responder às requisições
+            da API...                     & Até X ms \\
+    RNF02 & Segurança     & TODO: Senhas devem ser armazenadas com hash...
+                                           & bcrypt/Argon2 \\
+    RNF03 & Usabilidade   & TODO: A interface deve ser responsiva...
+                                           & Mobile-first \\
+    RNF04 & Disponibilidade & TODO: O sistema deve estar disponível...
+                                           & 99\% uptime \\
+    RNF05 & Manutenibilidade & TODO: O código deve ter cobertura mínima
+             de testes...                  & $\geq$ 70\% \\
+    % Adicione mais linhas conforme necessário
+    \bottomrule
+  \end{tabularx}
+  \fonte{Elaborado pelo autor.}
+\end{table}
+
+
+% -----------------------------------------------------------------------------
+%  4.3 MODELAGEM UML
+%  Inclua os diagramas mais relevantes para o entendimento do sistema.
+%  RECOMENDAÇÃO: use ferramentas externas (draw.io, Astah, PlantUML,
+%  Lucidchart) e exporte como PNG ou PDF para incluir com \includegraphics.
+%
+%  Diagramas sugeridos (inclua os que fizerem sentido para o seu projeto):
+%    - Diagrama de Casos de Uso      → visão geral do que o sistema faz
+%    - Diagrama de Classes           → estrutura do código/domínio
+%    - Diagrama de Sequência         → fluxo de uma operação específica
+%    - Diagrama de Atividades        → fluxo de um processo de negócio
+%    - Diagrama de Componentes       → arquitetura em alto nível
+% -----------------------------------------------------------------------------
+\section{Modelagem UML}
+\label{sec:uml}
+
+TODO: Parágrafo introdutório, dizendo quais diagramas foram elaborados
+e qual ferramenta foi utilizada para criá-los.
+
+
+% --- Diagrama de Casos de Uso ---
+\subsection{Diagrama de Casos de Uso}
+\label{subsec:casos-de-uso}
+
+TODO: Descreva os atores (quem interage com o sistema) e os principais
+casos de uso antes de mostrar o diagrama. Explique o que cada ator pode
+fazer e quais são os casos de uso mais relevantes.
+
+\begin{figure}[H]
+  \caption{Diagrama de Casos de Uso}
+  \label{fig:casos-de-uso}
+  \centering
+  % Substitua o \fbox pelo \includegraphics quando tiver a imagem pronta:
+  % \includegraphics[width=0.85\textwidth]{imagens/diagrama_casos_uso.png}
+  \fbox{\rule{0pt}{6cm}\rule{0.85\textwidth}{0pt}} % ← Placeholder, remova depois
+  \fonte{Elaborado pelo autor com TODO: [nome da ferramenta].}
+\end{figure}
+
+TODO: Após o diagrama, descreva os casos de uso mais importantes,
+complementando o que a imagem mostra.
+
+
+% --- Diagrama de Classes ---
+\subsection{Diagrama de Classes}
+\label{subsec:diagrama-classes}
+
+TODO: Explique as principais classes do sistema, seus atributos,
+métodos e relacionamentos antes de mostrar o diagrama.
+
+\begin{figure}[H]
+  \caption{Diagrama de Classes}
+  \label{fig:diagrama-classes}
+  \centering
+  % \includegraphics[width=\textwidth]{imagens/diagrama_classes.png}
+  \fbox{\rule{0pt}{7cm}\rule{0.9\textwidth}{0pt}} % ← Placeholder, remova depois
+  \fonte{Elaborado pelo autor.}
+\end{figure}
+
+
+% --- Diagramas adicionais (descomente e adapte conforme necessário) ---
+
+% \subsection{Diagrama de Sequência}
+% \label{subsec:diagrama-sequencia}
+% TODO: Escolha um fluxo importante (ex.: autenticação, realização de pedido)
+% e mostre a interação entre os componentes ao longo do tempo.
+%
+% \begin{figure}[H]
+%   \caption{Diagrama de Sequência — TODO: Nome do Fluxo}
+%   \label{fig:diagrama-sequencia}
+%   \centering
+%   % \includegraphics[width=\textwidth]{imagens/diagrama_sequencia.png}
+%   \fbox{\rule{0pt}{6cm}\rule{0.9\textwidth}{0pt}}
+%   \fonte{Elaborado pelo autor.}
+% \end{figure}
+
+
+% \subsection{Diagrama de Atividades}
+% \label{subsec:diagrama-atividades}
+%
+% \begin{figure}[H]
+%   \caption{Diagrama de Atividades — TODO: Nome do Processo}
+%   \label{fig:diagrama-atividades}
+%   \centering
+%   % \includegraphics[width=0.7\textwidth]{imagens/diagrama_atividades.png}
+%   \fbox{\rule{0pt}{8cm}\rule{0.6\textwidth}{0pt}}
+%   \fonte{Elaborado pelo autor.}
+% \end{figure}

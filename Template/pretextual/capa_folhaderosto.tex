@@ -1,0 +1,181 @@
+% =============================================================================
+%  pretextual/capa_folhaderosto.tex
+%  Contém: Capa, Folha de Rosto, Folha de Aprovação (template),
+%          Dedicatória (opcional) e Agradecimentos (opcional)
+%
+%  Todos os dados (título, autor, orientador...) são puxados do main.tex.
+%  Não é necessário repetir nada aqui.
+% =============================================================================
+% \imprimircapa
+
+% -----------------------------------------------------------------------------
+%  CAPA
+% -----------------------------------------------------------------------------
+\begin{capa}
+  \center
+  
+  % TODO: Substitua "logo_cesarschool.png" pelo nome do arquivo com o logo
+  %       da sua instituição. Coloque o arquivo dentro da pasta imagens/.
+  \includegraphics[width=4cm]{imagens/logo_cesarschool.png}\\
+  \vspace{0.5cm}
+
+
+  % TODO: Substitua as duas linhas abaixo pelo nome completo e pelo nome
+  %       abreviado da sua instituição, em letras maiúsculas.
+  %       Exemplo:
+  %         {\normalsize UNIVERSIDADE FEDERAL DE PERNAMBUCO}\\
+  %         {\normalsize UFPE}\\
+  {\normalsize TODO: NOME COMPLETO DA INSTITUIÇÃO}\\
+  \vspace{0.2cm}
+  {\normalsize TODO: NOME ABREVIADO DA ESCOLA}\\
+  \vspace{0.2cm}
+  {\normalsize CURSO DE \imprimirdepartamento}
+
+  \vspace{4cm}
+
+  % Autor
+  {\normalsize \MakeUppercase{\imprimirautor}}
+
+  \vfill
+
+  % Título em negrito
+  {\normalsize\bfseries \imprimirtitulo}
+
+  \vfill
+
+  % Local e data
+  {\normalsize \MakeUppercase{\imprimirlocal}}\\
+  \vspace{0.2cm}
+  {\normalsize \imprimirdata}
+
+  \vspace*{1cm}
+\end{capa}
+
+
+% -----------------------------------------------------------------------------
+%  FOLHA DE ROSTO
+%  Também automática. Contém: título, autor, preâmbulo, orientador e data.
+% -----------------------------------------------------------------------------
+% \imprimirfolhaderosto
+
+% -----------------------------------------------------------------------------
+%  FOLHA DE ROSTO
+% -----------------------------------------------------------------------------
+\begin{folhaderosto}
+  \begin{center}
+    
+    % TODO: Mesmo logo da capa — mesmo arquivo, só muda o tamanho.
+    \includegraphics[width=2.5cm]{imagens/logo_cesarschool.png}\\
+    \vspace{1cm}
+
+    % Autor
+    {\normalsize \MakeUppercase{\imprimirautor}}
+
+    \vspace{2cm}
+
+    % Título em negrito
+    {\normalsize\bfseries \imprimirtitulo}
+
+    \vspace*{\fill}
+
+    % Preâmbulo alinhado à direita
+    \hspace{.4\textwidth}
+    \begin{minipage}{.55\textwidth}
+      \SingleSpacing
+      \imprimirpreambulo
+
+      \vspace{1cm}
+
+      Orientação: \imprimirorientador.
+    \end{minipage}
+
+    \vspace*{\fill}
+
+    % Local e data
+    {\normalsize \MakeUppercase{\imprimirlocal}}\\
+    \vspace{0.2cm}
+    {\normalsize \imprimirdata}
+
+    \vspace*{1cm}
+
+  \end{center}
+\end{folhaderosto}
+
+
+% -----------------------------------------------------------------------------
+%  FOLHA DE APROVAÇÃO
+%  Descomente e preencha quando o trabalho for aprovado.
+%  Alternativa: se a escola fornecer o PDF, use:
+%    \includepdf{folha_aprovacao.pdf}  (requer pacote pdfpages no main.tex)
+% -----------------------------------------------------------------------------
+% \begin{folhadeaprovacao}
+%   \begin{center}
+%     {\ABNTEXchapterfont\large\imprimirautor}
+%     \vspace*{\fill}\vspace*{\fill}
+%     \begin{center}
+%       \ABNTEXchapterfont\bfseries\large\imprimirtitulo
+%     \end{center}
+%     \vspace*{\fill}
+%     \hspace{.45\textwidth}
+%     \begin{minipage}{.5\textwidth}
+%       \imprimirpreambulo
+%     \end{minipage}%
+%     \vspace*{\fill}
+%   \end{center}
+%   Trabalho aprovado em: \underline{\hspace{3cm}} de
+%   \underline{\hspace{3cm}} de \underline{\hspace{1.5cm}}.
+%
+%   \assinatura{\textbf{\imprimirorientador} \\ Orientador}
+%   \assinatura{\textbf{TODO: Prof. Nome Membro 1} \\ TODO: Instituição}
+%   \assinatura{\textbf{TODO: Prof. Nome Membro 2} \\ TODO: Instituição}
+%
+%   \begin{center}
+%     \imprimirlocal, \imprimirdata
+%   \end{center}
+% \end{folhadeaprovacao}
+
+
+% -----------------------------------------------------------------------------
+%  DEDICATÓRIA (opcional)
+%  Texto curto, sem título visível. Alinhado à direita/centro da página.
+%  Descomente para usar.
+% -----------------------------------------------------------------------------
+% \begin{dedicatoria}
+%   \vspace*{\fill}
+%   \hspace{.4\textwidth}
+%   \begin{minipage}{.5\textwidth}
+%     \itshape
+%     TODO: Dedico este trabalho a...
+%   \end{minipage}
+% \end{dedicatoria}
+
+
+% -----------------------------------------------------------------------------
+%  AGRADECIMENTOS (opcional)
+%  Descomente para usar.
+% -----------------------------------------------------------------------------
+% TODO: Os agradecimentos são opcionais, mas muito recomendados.
+%       Escreva de forma pessoal e sincera — sem formalidade excessiva.
+%       Mencione: família, amigos, orientador, colegas, instituição,
+%       financiadores (bolsa, empresa), e qualquer pessoa que contribuiu.
+%       Não há limite de tamanho, mas 1 a 3 parágrafos é o mais comum.
+\begin{agradecimentos}
+TODO: Escreva aqui seus agradecimentos.
+
+TODO: [Adicione outros agradecimentos que julgar importantes —
+colegas de curso, equipe do projeto, empresa parceira, etc.]
+\end{agradecimentos}
+
+
+% -----------------------------------------------------------------------------
+%  EPÍGRAFE (opcional)
+%  Uma citação motivacional, sem título, no canto inferior direito.
+%  Descomente para usar.
+% -----------------------------------------------------------------------------
+% \begin{epigrafe}
+%   \vspace*{\fill}
+%   \begin{flushright}
+%     \textit{``TODO: Citação inspiradora aqui.''}\\
+%     TODO: Autor
+%   \end{flushright}
+% \end{epigrafe}

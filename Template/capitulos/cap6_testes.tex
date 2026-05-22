@@ -1,0 +1,161 @@
+% =============================================================================
+%  capitulos/cap6_testes.tex
+%  CAPÍTULO 6 — TESTES E RESULTADOS
+%
+%  Objetivo: provar que o software funciona — ou documentar honestamente
+%  o que não funcionou e por quê.
+%
+%  REGRA DE OURO: os resultados apresentados aqui devem se relacionar
+%  diretamente com os objetivos definidos no Capítulo 1.
+%  Ou seja: para cada objetivo específico, deve haver uma evidência aqui.
+% =============================================================================
+
+\chapter{Testes e Resultados}
+\label{cap:testes}
+
+TODO: Parágrafo introdutório descrevendo o contexto geral dos testes:
+ambiente utilizado (local, servidor, nuvem), perfil dos usuários envolvidos
+(se houver), e o que será apresentado nas próximas seções.
+
+
+% -----------------------------------------------------------------------------
+%  6.1 PLANO DE TESTES
+%  Descreva o que foi testado, como e com qual objetivo.
+%  Tipos de testes comuns em TCCs de software:
+%    - Unitários: funções e métodos isolados
+%    - Integração: comunicação entre módulos/camadas
+%    - Usabilidade: experiência real com usuários
+%    - Performance: tempo de resposta, carga
+%    - Aceitação: validação com o cliente/orientador
+% -----------------------------------------------------------------------------
+\section{Plano de Testes}
+\label{sec:plano-testes}
+
+TODO: Descreva os tipos de testes realizados. Para cada tipo, mencione:
+o que foi testado, qual framework ou abordagem foi usada, e qual era o
+critério de sucesso.
+
+\begin{itemize}
+  \item \textbf{Testes Unitários}:
+        TODO: Descreva quais módulos ou funções foram cobertos, qual
+        framework foi utilizado (Jest, Pytest, JUnit, Vitest...) e qual
+        foi a porcentagem de cobertura de código atingida.
+
+  \item \textbf{Testes de Integração}:
+        TODO: Descreva quais integrações foram validadas — por exemplo:
+        API - banco de dados, frontend - backend. Mencione se foram
+        usadas ferramentas como Postman, Insomnia, Supertest, etc.
+
+  \item \textbf{Testes de Usabilidade}:
+        TODO: Descreva como foram conduzidos (sessões com usuários,
+        questionários SUS, heurísticas de Nielsen...), quem participou
+        (perfil, quantidade), e quais métricas foram coletadas.
+        O instrumento utilizado (questionário) pode ficar no Apêndice.
+
+  \item \textbf{Testes de Performance} (se aplicável):
+        TODO: Ferramentas utilizadas (Lighthouse, k6, JMeter...) e
+        métricas avaliadas (tempo de resposta, número de requisições
+        simultâneas, pontuação Lighthouse...).
+\end{itemize}
+
+
+% -----------------------------------------------------------------------------
+%  6.2 RESULTADOS
+%  Apresente os resultados de forma visual e objetiva.
+%  Use prints das telas principais, gráficos de métricas e tabelas.
+%  Organize por funcionalidade ou por objetivo específico.
+% -----------------------------------------------------------------------------
+\section{Resultados}
+\label{sec:resultados}
+
+
+% --- Telas principais do sistema ---
+\subsection{Interface e Funcionalidades Principais}
+\label{subsec:interface}
+
+TODO: Apresente as capturas de tela mais representativas do sistema,
+explicando o que cada tela mostra e como atende aos requisitos levantados.
+
+\begin{figure}[H]
+  \caption{TODO: Nome da tela — ex.: Tela Principal do Sistema}
+  \label{fig:tela-principal}
+  \centering
+  % \includegraphics[width=0.9\textwidth]{imagens/tela_principal.png}
+  \fbox{\rule{0pt}{5cm}\rule{0.85\textwidth}{0pt}} % ← Placeholder, remova depois
+  \fonte{Elaborado pelo autor.}
+\end{figure}
+
+TODO: Explique o que a tela mostra e como atende ao(s) RF(s) correspondente(s).
+
+% Repita o bloco acima para cada tela relevante:
+\begin{figure}[H]
+  \caption{TODO: Nome da tela 2}
+  \label{fig:tela-2}
+  \centering
+  % \includegraphics[width=0.9\textwidth]{imagens/tela_2.png}
+  \fbox{\rule{0pt}{5cm}\rule{0.85\textwidth}{0pt}} % ← Placeholder, remova depois
+  \fonte{Elaborado pelo autor.}
+\end{figure}
+
+
+% --- Análise frente aos requisitos ---
+\subsection{Análise Frente aos Requisitos}
+\label{subsec:analise-requisitos}
+
+TODO: Para cada objetivo específico definido no \cref{cap:introducao},
+relate se foi atingido e apresente a evidência correspondente (tela,
+teste, métrica).
+
+A \cref{tab:resultados-rf} apresenta o status de implementação de cada
+requisito funcional ao final do desenvolvimento.
+
+\begin{table}[H]
+  \caption{Status dos Requisitos Funcionais ao Final do Desenvolvimento}
+  \label{tab:resultados-rf}
+  \centering
+  \begin{tabularx}{\textwidth}{llXl}
+    \toprule
+    \textbf{ID} & \textbf{Requisito} & \textbf{Evidência / Observação}
+                & \textbf{Status} \\
+    \midrule
+    RF01 & TODO: Nome & TODO: Seção X / Figura Y demonstra o
+           funcionamento...
+         & \textcolor{green!50!black}{Implementado} \\
+    RF02 & TODO: Nome & TODO: ...
+         & \textcolor{green!50!black}{Implementado} \\
+    RF03 & TODO: Nome & TODO: Implementado parcialmente devido a
+           [motivo]...
+         & \textcolor{orange}{Parcial} \\
+    RF04 & TODO: Nome & TODO: Não implementado nesta versão devido
+           a [motivo]...
+         & \textcolor{red}{Não implementado} \\
+    \bottomrule
+  \end{tabularx}
+  \fonte{Elaborado pelo autor.}
+\end{table}
+
+
+% --- Resultados dos Testes de Usabilidade (se aplicável) ---
+% \subsection{Resultados dos Testes de Usabilidade}
+% \label{subsec:usabilidade}
+%
+% TODO: Apresente os resultados do questionário ou sessão de usabilidade.
+% Se usou o SUS (System Usability Scale), calcule a pontuação média e
+% classifique conforme a escala (Excelente > 85, Bom > 72, Ok > 52...).
+%
+% \begin{table}[H]
+%   \caption{Resultados do Questionário de Usabilidade (SUS)}
+%   \label{tab:sus}
+%   \centering
+%   \begin{tabularx}{\textwidth}{lXc}
+%     \toprule
+%     \textbf{Participante} & \textbf{Perfil} & \textbf{Pontuação SUS} \\
+%     \midrule
+%     P1 & TODO: Perfil do participante & TODO: XX \\
+%     P2 & TODO: Perfil do participante & TODO: XX \\
+%     \midrule
+%     \multicolumn{2}{l}{\textbf{Média}}    & TODO: XX \\
+%     \bottomrule
+%   \end{tabularx}
+%   \fonte{Elaborado pelo autor.}
+% \end{table}

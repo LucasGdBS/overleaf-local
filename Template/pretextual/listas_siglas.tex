@@ -1,0 +1,76 @@
+% =============================================================================
+%  pretextual/listas_siglas.tex
+%  Contém: Lista de Figuras, Lista de Tabelas, Lista de Códigos e
+%          Lista de Siglas e Abreviaturas
+%
+%  As três primeiras são AUTOMÁTICAS — geradas a partir dos \caption{} do texto.
+%  A lista de siglas é MANUAL — você adiciona cada entrada aqui.
+%
+%  QUANDO INCLUIR CADA LISTA (recomendação ABNT):
+%    - Lista de Figuras  → se o trabalho tiver 5 ou mais figuras
+%    - Lista de Tabelas  → se o trabalho tiver 5 ou mais tabelas
+%    - Lista de Códigos  → se houver vários blocos de código com caption
+%    - Lista de Siglas   → se o texto usar muitas siglas técnicas
+%  Se não quiser uma lista, basta comentar o bloco correspondente.
+% =============================================================================
+
+
+% -----------------------------------------------------------------------------
+%  LISTA DE FIGURAS
+%  Gerada automaticamente. O asterisco (*) impede que a lista apareça
+%  no próprio sumário (comportamento correto conforme ABNT).
+% -----------------------------------------------------------------------------
+\pdfbookmark[0]{\listfigurename}{lof}  % Adiciona bookmark no PDF
+\listoffigures*
+\cleardoublepage  % Garante que o próximo elemento comece em página nova
+
+
+% -----------------------------------------------------------------------------
+%  LISTA DE TABELAS
+% -----------------------------------------------------------------------------
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+
+% -----------------------------------------------------------------------------
+%  LISTA DE CÓDIGOS
+%  Exibe todos os blocos \begin{lstlisting}[caption={...}] do trabalho.
+%  Remova este bloco se não quiser listar os trechos de código separadamente.
+% -----------------------------------------------------------------------------
+\pdfbookmark[0]{Lista de Códigos}{lol}
+\lstlistoflistings
+\cleardoublepage
+
+
+% -----------------------------------------------------------------------------
+%  LISTA DE SIGLAS E ABREVIATURAS
+%  Feita MANUALMENTE. Mantenha em ordem ALFABÉTICA.
+%
+%  Formato: \item[SIGLA]  Significado por extenso
+%
+%  Alternativa automática: pacote 'glossaries' (descomente no main.tex)
+%  e defina cada sigla com: \newacronym{chave}{SIGLA}{Significado}
+% -----------------------------------------------------------------------------
+\begin{siglas}
+  \item[ABNT]   Associação Brasileira de Normas Técnicas
+  \item[API]    Application Programming Interface
+  \item[BD]     Banco de Dados
+  \item[CRUD]   Create, Read, Update, Delete
+  \item[CSS]    Cascading Style Sheets
+  \item[DER]    Diagrama Entidade-Relacionamento
+  \item[HTML]   HyperText Markup Language
+  \item[HTTP]   HyperText Transfer Protocol
+  \item[HTTPS]  HyperText Transfer Protocol Secure
+  \item[IDE]    Integrated Development Environment
+  \item[JSON]   JavaScript Object Notation
+  \item[MVC]    Model-View-Controller
+  \item[RF]     Requisito Funcional
+  \item[RNF]    Requisito Não Funcional
+  \item[REST]   Representational State Transfer
+  \item[SQL]    Structured Query Language
+  \item[TCC]    Trabalho de Conclusão de Curso
+  \item[UML]    Unified Modeling Language
+  \item[URL]    Uniform Resource Locator
+  % TODO: Adicione as siglas específicas do seu projeto abaixo:
+\end{siglas}

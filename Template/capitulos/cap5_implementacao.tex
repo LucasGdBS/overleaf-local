@@ -1,0 +1,160 @@
+% =============================================================================
+%  capitulos/cap5_implementacao.tex
+%  CAPÍTULO 5 — IMPLEMENTAÇÃO E DESENVOLVIMENTO
+%
+%  Objetivo: descrever o que foi de fato construído.
+%  Pode haver diferenças em relação ao planejado — explique-as quando ocorrer.
+%
+%  NÃO cole todo o código-fonte aqui. Selecione trechos que:
+%    - Resolvem um problema técnico não óbvio
+%    - Implementam a lógica central do sistema
+%    - Usam uma abordagem inovadora ou pouco comum
+% =============================================================================
+
+\chapter{Implementação e Desenvolvimento}
+\label{cap:implementacao}
+
+TODO: Parágrafo introdutório mencionando as principais tecnologias usadas,
+como o capítulo está organizado e se houve alguma mudança relevante em
+relação ao que foi planejado nos capítulos anteriores.
+
+
+% -----------------------------------------------------------------------------
+%  5.1 ARQUITETURA DO SISTEMA
+%  Mostre como os componentes se comunicam entre si.
+%  Ex.: React (frontend) → REST API (FastAPI) → PostgreSQL (banco)
+%  Um diagrama de arquitetura aqui vale mais que mil palavras.
+% -----------------------------------------------------------------------------
+\section{Arquitetura do Sistema}
+\label{sec:arquitetura}
+
+TODO: Descreva as camadas e componentes do sistema e como eles se
+comunicam. Mencione protocolos (HTTP/REST, WebSocket, gRPC...) e padrões
+usados na comunicação entre as partes.
+
+\begin{figure}[H]
+  \caption{Arquitetura Geral do Sistema}
+  \label{fig:arquitetura}
+  \centering
+  % \includegraphics[width=0.9\textwidth]{imagens/arquitetura.png}
+  \fbox{\rule{0pt}{5cm}\rule{0.85\textwidth}{0pt}} % ← Placeholder, remova depois
+  \fonte{Elaborado pelo autor.}
+\end{figure}
+
+TODO: Após o diagrama, descreva cada componente: o que faz, em que
+tecnologia foi implementado e como se integra aos demais.
+
+
+% -----------------------------------------------------------------------------
+%  5.2 MODELAGEM DE DADOS
+%  Apresente o DER (Diagrama Entidade-Relacionamento) se houver BD relacional.
+%  Para NoSQL: descreva a estrutura dos documentos/coleções principais.
+%  Remova esta seção se o projeto não usar banco de dados persistente.
+% -----------------------------------------------------------------------------
+\section{Modelagem de Dados}
+\label{sec:modelagem-dados}
+
+TODO: Apresente as principais entidades do sistema e seus relacionamentos.
+A \cref{fig:der} exibe o Diagrama Entidade-Relacionamento do banco de dados.
+
+\begin{figure}[H]
+  \caption{Diagrama Entidade-Relacionamento (DER)}
+  \label{fig:der}
+  \centering
+  % \includegraphics[width=0.9\textwidth]{imagens/der.png}
+  \fbox{\rule{0pt}{7cm}\rule{0.9\textwidth}{0pt}} % ← Placeholder, remova depois
+  \fonte{Elaborado pelo autor.}
+\end{figure}
+
+TODO: Após o DER, descreva as tabelas/entidades mais importantes,
+seus atributos e as cardinalidades dos relacionamentos.
+
+
+% -----------------------------------------------------------------------------
+%  5.3 DESTAQUES DE IMPLEMENTAÇÃO
+%  Subseções para funcionalidades relevantes ou tecnicamente interessantes.
+%  Cada subseção deve ter: contexto → problema técnico → solução → código.
+%  Use blocos de código CURTOS e FOCADOS — sem colar arquivos inteiros.
+% -----------------------------------------------------------------------------
+\section{Destaques de Implementação}
+\label{sec:destaques}
+
+
+% --- Destaque 1 ---
+\subsection{TODO: Módulo ou Funcionalidade em Destaque 1}
+\label{subsec:destaque1}
+
+TODO: Explique o contexto: o que este módulo faz dentro do sistema?
+Em seguida, descreva o problema técnico enfrentado e a solução adotada.
+O \cref{cod:destaque1} apresenta o trecho responsável por [descreva o quê].
+
+% Bloco de código — troque "Python" pela linguagem do seu projeto:
+% Linguagens suportadas pelo listings: Python, Java, C, C++,
+%   JavaScript, HTML, SQL, bash, PHP, Ruby, Swift, Kotlin, R...
+\begin{lstlisting}[
+  language=Python,
+  caption={TODO: Descrição objetiva do que este código faz},
+  label={cod:destaque1}
+]
+# TODO: Cole aqui um trecho curto e relevante do seu código.
+# Foco: lógica central, não boilerplate.
+
+def exemplo_funcao(parametro):
+    """
+    TODO: Docstring explicando a função.
+    """
+    # Comentários no código ajudam o leitor a acompanhar o raciocínio
+    resultado = parametro * 2
+    return resultado
+\end{lstlisting}
+
+TODO: Após o código, explique as linhas ou blocos mais importantes.
+O leitor não deve precisar adivinhar o que acontece.
+
+
+% --- Destaque 2 ---
+\subsection{TODO: Módulo ou Funcionalidade em Destaque 2}
+\label{subsec:destaque2}
+
+TODO: Idem para outro trecho relevante do projeto.
+
+% Exemplo de bloco JavaScript:
+% \begin{lstlisting}[
+%   language=JavaScript,
+%   caption={Hook React para consumo da API de autenticação},
+%   label={cod:auth-hook}
+% ]
+% import { useState } from 'react';
+%
+% const useAuth = () => {
+%   const [user, setUser] = useState(null);
+%
+%   const login = async (credentials) => {
+%     const response = await fetch('/api/auth/login', {
+%       method: 'POST',
+%       body: JSON.stringify(credentials),
+%     });
+%     const data = await response.json();
+%     setUser(data.user);
+%   };
+%
+%   return { user, login };
+% };
+% \end{lstlisting}
+
+
+% --- Destaque 3 (descomente se necessário) ---
+% \subsection{TODO: Módulo ou Funcionalidade em Destaque 3}
+% \label{subsec:destaque3}
+% TODO: Idem.
+
+
+% -----------------------------------------------------------------------------
+%  5.4 INTEGRAÇÃO ENTRE COMPONENTES (opcional)
+%  Se a comunicação entre frontend, backend e banco de dados tiver algum
+%  aspecto técnico relevante (autenticação JWT, WebSocket, cache...) vale
+%  dedicar uma subseção para isso.
+% -----------------------------------------------------------------------------
+% \section{Integração entre Componentes}
+% \label{sec:integracao}
+% TODO: Descreva como as partes do sistema se comunicam em tempo de execução.

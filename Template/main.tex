@@ -1,0 +1,294 @@
+% =============================================================================
+%  main.tex — ARQUIVO PRINCIPAL DO TCC
+%  É aqui que ficam TODAS as configurações e onde os capítulos são unidos.
+%
+%  ESTRUTURA DE ARQUIVOS DO PROJETO:
+%
+%  main.tex                        ← você está aqui
+%  referencias.bib                 ← banco de referências BibTeX
+%  imagens/                        ← coloque aqui todos os .png/.pdf de figuras
+%  pretextual/
+%    ├── capa_folhaderosto.tex      ← capa, folha de rosto e aprovação
+%    ├── resumo.tex                 ← resumo (PT) e abstract (EN)
+%    └── listas_siglas.tex          ← listas de figuras, tabelas, códigos e siglas
+%  capitulos/
+%    ├── cap1_introducao.tex
+%    ├── cap2_fundamentacao.tex
+%    ├── cap3_metodologia.tex
+%    ├── cap4_requisitos.tex
+%    ├── cap5_implementacao.tex
+%    ├── cap6_testes.tex
+%    └── cap7_conclusao.tex
+%  postextual/
+%    ├── apendices.tex
+%    └── anexos.tex
+%
+%  COMO COMPILAR NO OVERLEAF:
+%    Menu > Main document > main.tex
+%    Menu > Compiler > pdfLaTeX
+%    Compile ao menos 2x para sumário e referências ficarem corretos.
+% =============================================================================
+
+
+% -----------------------------------------------------------------------------
+%  CLASSE DO DOCUMENTO
+% -----------------------------------------------------------------------------
+\documentclass[
+	hidelinks,
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	%twoside,			% para impressão em verso e anverso. Oposto a oneside
+	oneside,            % padrão para CESAR School visto que nao exigem versão impressa dos trabalhos
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	english,
+	brazil,       % Margens iguais em todas as páginas (ideal para PDF/entrega digital)
+]{abntex2}
+\renewcommand{\baselinestretch}{1.5} %para customizar o espaço entre as linhas do texto
+
+
+% =============================================================================
+%  PACOTES
+% =============================================================================
+
+% --- CODIFICAÇÃO E IDIOMA ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\let\MakeTextUppercase\MakeUppercase
+\usepackage[brazil]{babel}
+
+% --- FONTE HELVETICA (equivalente à Arial, funciona no pdfLaTeX) ---
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}  % ativa como fonte padrão do documento
+
+% --- CONFIGURAÇÃO PARA OS TITULOS --- %
+
+\renewcommand{\ABNTEXchapterfont}{\fontfamily{phv}\selectfont}
+\renewcommand{\ABNTEXchapterfontsize}{\bfseries\normalsize}
+
+\renewcommand{\ABNTEXsectionfont}{\fontfamily{phv}\selectfont}
+\renewcommand{\ABNTEXsectionfontsize}{\normalsize}
+
+\renewcommand{\ABNTEXsubsectionfont}{\fontfamily{phv}\selectfont}
+\renewcommand{\ABNTEXsubsectionfontsize}{\bfseries\normalsize}
+
+\renewcommand{\ABNTEXsubsubsectionfont}{\fontfamily{phv}\itshape\selectfont}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
+
+% --- MARGENS (norma ABNT: sup=3, inf=2, esq=3, dir=2) ---
+\usepackage[
+  top=3cm,
+  bottom=2cm,
+  left=3cm,
+  right=2cm
+]{geometry}
+
+% --- ESPAÇAMENTO ---
+\usepackage{setspace}
+
+% --- FIGURAS E TABELAS ---
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% --- CORES ---
+\usepackage{xcolor}
+\definecolor{codebackground}{rgb}{0.95, 0.95, 0.95}
+\definecolor{codekeyword}{rgb}{0.0, 0.0, 0.8}
+\definecolor{codecomment}{rgb}{0.0, 0.5, 0.0}
+\definecolor{codestring}{rgb}{0.6, 0.0, 0.0}
+
+% --- CÓDIGO-FONTE ---
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebackground},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  framesep=4pt,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2,
+  showstringspaces=false,
+  captionpos=b,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {ã}{{\~a}}1 {õ}{{\~o}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1
+}
+
+% --- HIPERLINKS E METADADOS DO PDF ---
+\usepackage{hyperref}
+\makeatletter
+\hypersetup{
+    %pagebackref=true,
+    pdftitle={\@title}, 
+    pdfauthor={\@author},
+    pdfsubject={\imprimirpreambulo},
+    pdfcreator={LaTeX with abnTeX2 - change by lgbsb@cesar.school},
+    pdfkeywords={cesar}{cesarschool}{abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+    colorlinks=false,       		% false: boxed links; true: colored links
+    linkcolor=blue,          	% color of internal links
+    citecolor=blue,        		% color of links to bibliography
+    filecolor=magenta,      		% color of file links
+    urlcolor=blue,
+    bookmarksdepth=4
+}
+\makeatother
+
+\pdfstringdefDisableCommands{\let\uppercase\@firstofone}
+
+% --- CITAÇÕES E REFERÊNCIAS NO ESTILO ABNT ---
+\usepackage[alf]{abntex2cite}
+
+% --- REFERÊNCIAS CRUZADAS INTELIGENTES ---
+\usepackage{cleveref}
+\crefname{figure}{Figura}{Figuras}
+\crefname{table}{Tabela}{Tabelas}
+\crefname{listing}{Código}{Códigos}
+\crefname{chapter}{Capítulo}{Capítulos}
+\crefname{section}{Seção}{Seções}
+\AtBeginDocument{%
+  \renewcommand{\crefpairconjunction}{ e }%
+  \renewcommand{\creflastconjunction}{ e }%
+  \renewcommand{\crefrangeconjunction}{ a }%
+}
+
+% --- LISTAS CUSTOMIZADAS ---
+\usepackage{enumitem}
+
+% --- CABEÇALHO ---
+% Por padrão o abntex2 exibe o título do capítulo e uma barra no topo de cada
+% página. O estilo abaixo remove isso e mantém apenas o número de página no
+% canto superior direito, conforme exigido pela ABNT.
+\makepagestyle{semcabecalho}
+\makeoddhead{semcabecalho}{}{}{\thepage}
+\makeevenhead{semcabecalho}{}{}{\thepage}
+
+
+
+% =============================================================================
+%  INFORMAÇÕES DO TRABALHO
+% =============================================================================
+
+% TODO: Título completo do seu TCC. Deve ser claro e descritivo.
+%       Exemplo: "Sistema de Recomendação de Filmes com Aprendizado de Máquina"
+\titulo{TODO: TÍTULO COMPLETO DO SEU TCC}
+
+% TODO: Seu nome completo, sem abreviações.
+%       Exemplo: "Maria Fernanda Costa Lima"
+\autor{TODO: Seu Nome Completo}
+
+% TODO: Ano em que você vai defender/entregar o TCC.
+%       Exemplo: 2026
+\data{TODO: Ano de entrega}
+
+% TODO: Nome completo do(a) orientador(a).
+%       Exemplo: "Prof. Dr. João da Silva"
+\orientador{TODO: Nome do(a) Orientador(a)}
+
+% TODO: Dados da sua instituição.
+%       Linha 1: sigla ou nome abreviado (ex: UFPE)
+%       Linha 2: nome completo da escola/faculdade (ex: Centro de Informática)
+%       Linha 3: nome do seu curso de graduação
+\instituicao{%
+  TODO: Sigla da Instituição \\
+  TODO: Nome da Escola \\
+  TODO: Nome do Curso
+}
+
+% TODO: Cidade onde fica a sua instituição.
+%       Exemplo: "Recife" ou "São Paulo"
+\local{TODO: Cidade da instituição}
+
+% TODO: Tipo do trabalho acadêmico.
+%       Exemplos: "Trabalho de Conclusão de Curso", "Monografia", "Relatório Técnico"
+\tipotrabalho{TODO: Tipo de Trabalho Acadêmico}
+
+% TODO: O preâmbulo é o texto formal da folha de rosto.
+%       Adapte o modelo abaixo com o nome do seu curso e instituição.
+\preambulo{
+    TODO: [Tipo do trabalho] apresentado ao curso de
+    Graduação em TODO: [Nome do Curso] da
+    TODO: [Nome completo da instituição], como requisito
+    para obtenção do título de TODO: [Título obtido, ex: Bacharel em Ciências da Computação].
+}
+
+
+% =============================================================================
+%  INÍCIO DO DOCUMENTO
+% =============================================================================
+\providecommand{\imprimirdepartamento}{}
+\newcommand{\departamento}[1]{\renewcommand{\imprimirdepartamento}{#1}}
+
+% TODO: Nome do departamento ou curso (mesmo valor do campo "Nome do Curso" acima).
+%       Exemplo: "Ciência da Computação" ou "Engenharia de Software"
+\departamento{TODO: NOME DO DEPARTAMENTO / CURSO}
+\begin{document}
+
+\frenchspacing
+
+
+% =============================================================================
+%  ELEMENTOS PRÉ-TEXTUAIS
+% =============================================================================
+\pretextual
+
+\input{pretextual/capa_folhaderosto}
+
+\input{pretextual/resumo}
+
+% \input{pretextual/listas_siglas}
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+
+% =============================================================================
+%  ELEMENTOS TEXTUAIS
+% =============================================================================
+\textual
+\pagestyle{semcabecalho}
+
+\input{capitulos/cap1_introducao}
+\input{capitulos/cap2_fundamentacao}
+\input{capitulos/cap3_metodologia}
+\input{capitulos/cap4_requisitos}
+\input{capitulos/cap5_implementacao}
+\input{capitulos/cap6_testes}
+\input{capitulos/cap7_conclusao}
+
+
+% =============================================================================
+%  ELEMENTOS PÓS-TEXTUAIS
+% =============================================================================
+\postextual
+
+\bibliography{referencias}
+
+% \input{postextual/apendices}
+
+% \input{postextual/anexos}
+
+
+\end{document}

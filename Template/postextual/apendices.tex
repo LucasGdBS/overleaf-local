@@ -1,0 +1,59 @@
+% =============================================================================
+%  postextual/apendices.tex
+%  APÊNDICES — documentos criados pelo PRÓPRIO AUTOR
+%
+%  Exemplos: questionários, roteiros de entrevista, manuais do usuário,
+%            scripts de instalação, detalhamento de casos de teste...
+%
+%  Numeração: Apêndice A, Apêndice B, Apêndice C...
+%  O abntex2 cuida da numeração automaticamente.
+% =============================================================================
+
+\begin{apendicesenv}
+
+% \partapendices gera a página divisória com o título "APÊNDICES" em destaque.
+% Exigida pelo abntex2 e pelas normas ABNT.
+\partapendices
+
+
+% -----------------------------------------------------------------------------
+%  APÊNDICE A
+%  Substitua o título e conteúdo pelo seu apêndice real.
+%  Exemplo de uso: questionário de pesquisa com usuários.
+% -----------------------------------------------------------------------------
+\chapter{TODO: Título do Apêndice A}
+\label{ap:questionario}
+
+TODO: Descreva brevemente o contexto deste apêndice — por que ele
+foi elaborado e como foi utilizado no projeto.
+
+% Exemplo de questionário:
+\begin{enumerate}
+  \item TODO: Pergunta 1 — ex.: Com que frequência você realiza a
+        atividade X?
+        \begin{enumerate}[label=(\alph*)]
+          \item Nunca
+          \item Raramente (menos de 1 vez por semana)
+          \item Às vezes (1 a 3 vezes por semana)
+          \item Frequentemente (mais de 3 vezes por semana)
+        \end{enumerate}
+
+  \item TODO: Pergunta 2 — ex.: Você já utilizou alguma ferramenta
+        para Y? Qual?
+
+        \noindent\rule{\textwidth}{0.4pt} % Linha para resposta aberta
+
+  \item TODO: Adicione as demais perguntas do seu instrumento.
+\end{enumerate}
+
+
+% -----------------------------------------------------------------------------
+%  APÊNDICE B (descomente e adapte se necessário)
+% -----------------------------------------------------------------------------
+% \chapter{TODO: Título do Apêndice B}
+% \label{ap:manual}
+%
+% TODO: Conteúdo do Apêndice B.
+
+
+\end{apendicesenv}
