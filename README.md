@@ -42,7 +42,7 @@ make logs
 
 A saída vai conter algo como:
 
-```
+```url
 http://localhost/user/activate?token=...&user_id=...
 ```
 

@@ -138,6 +138,7 @@ def main():
         print("ERROR: Set OVERLEAF_EMAIL and OVERLEAF_PASSWORD in .env")
         sys.exit(1)
 
+    os.umask(0o002)
     PROJECTS_DIR.mkdir(exist_ok=True)
 
     session = requests.Session()
@@ -151,10 +152,19 @@ def main():
     active = [p for p in projects if not p.get("archived") and not p.get("trashed")]
     print(f"Found {len(active)} active project(s) (of {len(projects)} total)")
 
+    synced_dirs = set()
     success = 0
     for project in active:
+        name = sanitize_name(project.get("name", project.get("id") or project.get("_id")))
         if sync_project(session, base_url, project):
+            synced_dirs.add(name)
             success += 1
+
+    # Remove local dirs that no longer exist as active projects
+    for entry in PROJECTS_DIR.iterdir():
+        if entry.is_dir() and entry.name not in synced_dirs:
+            shutil.rmtree(entry)
+            print(f"  Removed: projects/{entry.name}/")
 
     print(f"\nSynced {success}/{len(active)} projects.")
 

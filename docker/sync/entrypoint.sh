@@ -5,7 +5,8 @@ if [ $# -gt 0 ]; then
   exec "$@"
 fi
 
-# Default: run crond
-echo "*/30 * * * * python3 /repo/scripts/sync.py >> /var/log/sync.log 2>&1" | crontab -
-echo "[overleaf-sync] Service started. Cron running every 30 minutes."
-exec crond -f -d 8
+echo "[overleaf-sync] Service started. Syncing every 30 minutes."
+while true; do
+  python3 /repo/scripts/sync.py 2>&1 | tee -a /repo/sync.log
+  sleep 1800
+done
