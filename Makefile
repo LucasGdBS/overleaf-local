@@ -46,9 +46,5 @@ install:
 	bash scripts/install.sh
 
 setup:
-	@if [ ! -f .env ]; then cp .env.example .env && echo ".env criado — preencha com suas credenciais antes de continuar."; \
-	else echo ".env já existe, pulando."; fi
-	@sed -i "s/^DOCKER_UID=.*/DOCKER_UID=$$(id -u)/" .env
-	@sed -i "s/^DOCKER_GID=.*/DOCKER_GID=$$(id -g)/" .env
-	@echo "DOCKER_UID/GID configurados para $$(id -u):$$(id -g)"
+	bash scripts/setup-env.sh
 	bash scripts/install.sh
