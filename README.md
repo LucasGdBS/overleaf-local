@@ -78,7 +78,7 @@ O log do cron fica em `sync.log` (ignorado pelo git).
 Para sincronizar automaticamente antes de cada `git push`, instale o hook:
 
 ```bash
-make auto-sync
+make push-sync
 ```
 
 ---
@@ -114,7 +114,7 @@ docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template/Temp
 | Comando                        | O que faz                                                           |
 | ------------------------------ | ------------------------------------------------------------------- |
 | `make setup`                   | Cria `.env` e configura UID, GID e plataforma automaticamente       |
-| `make auto-sync`               | Instala hook de pre-push para sincronizar antes de cada push        |
+| `make push-sync`               | Instala hook de pre-push para sincronizar antes de cada push        |
 | `make up`                      | Sobe todos os containers em background                              |
 | `make down`                    | Para e remove os containers                                         |
 | `make restart`                 | Reinicia os containers                                              |
@@ -137,7 +137,7 @@ docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template/Temp
 │   ├── sync.py             # Script de sync (download) dos projetos
 │   ├── upload.py           # Script de upload de projetos para o Overleaf
 │   ├── setup-env.sh        # Configura .env com UID, GID e plataforma do sistema
-│   └── setup-auto-sync.sh  # Instala o hook pre-push
+│   └── setup-push-sync.sh  # Instala o hook pre-push
 ├── config/
 │   └── mongodb-init-replica-set.js
 ├── Template/               # Template LaTeX do TCC CesarSchool

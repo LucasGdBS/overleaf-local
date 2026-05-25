@@ -1,4 +1,4 @@
-.PHONY: up down restart build logs logs-sync sync upload upload-template setup auto-sync zip pdf
+.PHONY: up down restart build logs logs-sync sync upload upload-template setup push-sync zip pdf cron-sync
 
 help:
 	@echo "Comandos disponíveis:"
@@ -12,7 +12,8 @@ help:
 	@echo "  upload PATH_ARG=... - Sobe um diretório ou zip como novo projeto no Overleaf"
 	@echo "  upload-template  - Sobe o Template padrão para o Overleaf"
 	@echo "  setup            - Configura o ambiente (cria .env com valores do sistema)"
-	@echo "  auto-sync        - Instala hook de pre-push para sincronizar antes de cada push"
+	@echo "  push-sync        - Instala hook de pre-push para sincronizar antes de cada push"
+	@echo "  cron-sync        - Inicia o sync automático a cada 30 minutos em background"
 	@echo "  zip PROJECT=...  - Baixa o projeto do Overleaf como arquivo zip"
 	@echo "  pdf PROJECT=...  - Compila e baixa o PDF do projeto do Overleaf"
 
@@ -32,7 +33,7 @@ logs:
 	docker compose logs -f sharelatex
 
 logs-sync:
-	docker compose logs -f sync
+	docker compose --profile cron logs -f sync
 
 sync:
 	docker compose run --rm sync python3 /repo/scripts/sync.py
@@ -47,8 +48,11 @@ upload-template:
 setup:
 	bash scripts/setup-env.sh
 
-auto-sync:
-	bash scripts/setup-auto-sync.sh
+push-sync:
+	bash scripts/setup-push-sync.sh
+
+cron-sync:
+	docker compose --profile cron up -d sync
 
 zip:
 	@test -n "$(PROJECT)" || (echo "Uso: make zip PROJECT=nome-do-projeto" && exit 1)

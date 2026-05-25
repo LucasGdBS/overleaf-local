@@ -20,9 +20,10 @@ make logs        # follow Overleaf logs (also shows the admin activation URL on 
 make logs-sync   # follow the sync container logs
 
 # Sync and upload
-make sync                        # download all Overleaf projects → projects/
+make sync                        # download all Overleaf projects → projects/ (one-shot)
 make upload PATH_ARG=path/to/dir # pack a directory as a new Overleaf project
 make upload-template             # upload Template/ as "Template TCC CesarSchool"
+make cron-sync                   # start the sync container in background (syncs every 30 min)
 ```
 
 To run a script directly inside the sync container (e.g. for debugging):
@@ -41,9 +42,9 @@ docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template --na
 | `sharelatex` | custom build (`docker/sharelatex/`) | Overleaf CE + TexLive with Portuguese support, port 80                                                  |
 | `mongo`      | `mongo:8.0`                         | MongoDB with replica set (`--replSet overleaf`), initialised by `config/mongodb-init-replica-set.js`    |
 | `redis`      | `redis:6.2`                         | Session/job queue for Overleaf                                                                          |
-| `sync`       | custom build (`docker/sync/`)       | Python Alpine container; mounts the whole repo at `/repo`, runs `sync.py` every 30 min via a shell loop |
+| `sync`       | custom build (`docker/sync/`)       | Python Alpine container; mounts the whole repo at `/repo`, runs `sync.py` every 30 min via a shell loop. Uses Docker Compose profile `cron` — **not started by `make up`**, only by `make cron-sync`. |
 
-The `sync` container starts only after `sharelatex` passes its healthcheck (`curl /login`).
+The `sync` container (when started via `make cron-sync`) starts only after `sharelatex` passes its healthcheck (`curl /login`). One-off commands like `make sync` and `make upload` use `docker compose run --rm sync` and don't require the container to be running.
 
 ### Sync flow (`scripts/sync.py`)
 
@@ -71,7 +72,7 @@ The `.env` file is gitignored; `.env.example` is the template.
 
 ### Pre-push hook (optional)
 
-`make auto-sync` installs `.git/hooks/pre-push` via `scripts/setup-auto-sync.sh`, which runs `make sync` before every `git push` to keep `projects/` up to date.
+`make push-sync` installs `.git/hooks/pre-push` via `scripts/setup-push-sync.sh`, which runs `make sync` before every `git push` to keep `projects/` up to date.
 
 ### Persistent data
 

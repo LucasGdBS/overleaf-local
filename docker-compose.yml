@@ -58,6 +58,7 @@ services:
     build: ./docker/sync
     container_name: overleaf-sync
     restart: unless-stopped
+    profiles: [cron]
     user: "${DOCKER_UID:-1000}:${DOCKER_GID:-1000}"
     volumes:
       - ./:/repo
