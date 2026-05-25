@@ -3,6 +3,7 @@ services:
     restart: always
     build: ./docker/sharelatex
     container_name: sharelatex
+    platform: ${DOCKER_PLATFORM:-linux/amd64}
     depends_on:
       mongo:
         condition: service_healthy

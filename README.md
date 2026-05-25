@@ -1,6 +1,6 @@
 # Overleaf Local
 
-Overleaf Community Edition rodando localmente via Docker, com sync automático dos projetos para o repositório git.
+Overleaf Community Edition rodando localmente via Docker, com sync automático dos projetos para o repositório git. Suporta AMD64 e ARM64 (incluindo Apple Silicon).
 
 ## Pré-requisitos
 
@@ -10,16 +10,19 @@ Overleaf Community Edition rodando localmente via Docker, com sync automático d
 
 ## Primeiro uso
 
-### 1. Credenciais
+### 1. Configurar o ambiente
 
 ```bash
 make setup
 ```
 
-Isso cria o `.env` a partir do exemplo e instala o hook de git. Preencha o `.env` gerado:
+Cria o `.env` a partir do exemplo e preenche automaticamente:
+- `DOCKER_UID` / `DOCKER_GID` com o usuário atual
+- `DOCKER_PLATFORM` com a arquitetura da máquina (`linux/amd64` ou `linux/arm64`)
+
+Preencha o `.env` gerado com suas credenciais:
 
 ```env
-OVERLEAF_URL=http://localhost
 OVERLEAF_EMAIL=admin@overleaf.local   # email do admin criado automaticamente
 OVERLEAF_PASSWORD=sua_senha           # senha que você vai definir no passo 3
 ```
@@ -42,7 +45,7 @@ make logs
 
 A saída vai conter algo como:
 
-```url
+```
 http://localhost/user/activate?token=...&user_id=...
 ```
 
@@ -61,7 +64,7 @@ Os projetos do Overleaf são espelhados na pasta `projects/`, um subdiretório p
 | Modo           | Como funciona                                    |
 | -------------- | ------------------------------------------------ |
 | **Automático** | Container `overleaf-sync` roda a cada 30 minutos |
-| **Pre-push**   | Dispara antes de todo `git push`                 |
+| **Pre-push**   | Dispara antes de todo `git push` (opcional)      |
 | **Manual**     | Comando abaixo                                   |
 
 ```bash
@@ -69,6 +72,14 @@ make sync
 ```
 
 O log do cron fica em `sync.log` (ignorado pelo git).
+
+### Sync automático no pre-push (opcional)
+
+Para sincronizar automaticamente antes de cada `git push`, instale o hook:
+
+```bash
+make auto-sync
+```
 
 ---
 
@@ -100,32 +111,33 @@ docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template/Temp
 
 ## Comandos disponíveis
 
-| Comando                        | O que faz                                                      |
-| ------------------------------ | -------------------------------------------------------------- |
-| `make setup`                   | Primeiro uso: cria `.env` a partir do exemplo e instala o hook |
-| `make up`                      | Sobe todos os containers em background                         |
-| `make down`                    | Para e remove os containers                                    |
-| `make restart`                 | Reinicia os containers                                         |
-| `make build`                   | Reconstrói as imagens                                          |
-| `make logs`                    | Acompanha os logs do Overleaf                                  |
-| `make logs-sync`               | Acompanha os logs do serviço de sync                           |
-| `make sync`                    | Executa o sync manualmente                                     |
-| `make upload PATH_ARG=<path>`  | Sobe um diretório ou zip como novo projeto no Overleaf         |
-| `make upload-template`         | Sobe o Template padrão para o Overleaf                         |
-| `make install`                 | Reinstala o hook de pre-push                                   |
+| Comando                        | O que faz                                                           |
+| ------------------------------ | ------------------------------------------------------------------- |
+| `make setup`                   | Cria `.env` e configura UID, GID e plataforma automaticamente       |
+| `make auto-sync`               | Instala hook de pre-push para sincronizar antes de cada push        |
+| `make up`                      | Sobe todos os containers em background                              |
+| `make down`                    | Para e remove os containers                                         |
+| `make restart`                 | Reinicia os containers                                              |
+| `make build`                   | Reconstrói as imagens                                               |
+| `make logs`                    | Acompanha os logs do Overleaf                                       |
+| `make logs-sync`               | Acompanha os logs do serviço de sync                                |
+| `make sync`                    | Executa o sync manualmente                                          |
+| `make upload PATH_ARG=<path>`  | Sobe um diretório ou zip como novo projeto no Overleaf              |
+| `make upload-template`         | Sobe o Template padrão para o Overleaf                              |
 
 ---
 
 ## Estrutura do repositório
 
-```tree
+```
 ├── docker/
 │   ├── sharelatex/         # Imagem do Overleaf com TexLive em português
 │   └── sync/               # Container de sync (Python + git + crond)
 ├── scripts/
 │   ├── sync.py             # Script de sync (download) dos projetos
 │   ├── upload.py           # Script de upload de projetos para o Overleaf
-│   └── install.sh          # Instala o hook pre-push
+│   ├── setup-env.sh        # Configura .env com UID, GID e plataforma do sistema
+│   └── setup-auto-sync.sh  # Instala o hook pre-push
 ├── config/
 │   └── mongodb-init-replica-set.js
 ├── Template/               # Template LaTeX do TCC CesarSchool

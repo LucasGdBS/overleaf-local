@@ -1,4 +1,4 @@
-FROM sharelatex/sharelatex
+FROM --platform=linux/amd64 sharelatex/sharelatex
 
 COPY init-admin.sh /etc/my_init.d/999_init_admin.sh
 RUN chmod +x /etc/my_init.d/999_init_admin.sh

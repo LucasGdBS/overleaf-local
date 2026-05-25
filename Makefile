@@ -1,4 +1,4 @@
-.PHONY: up down restart build logs logs-sync sync upload upload-template install setup
+.PHONY: up down restart build logs logs-sync sync upload upload-template setup auto-sync
 
 help:
 	@echo "Comandos disponíveis:"
@@ -11,8 +11,8 @@ help:
 	@echo "  sync             - Baixa todos os projetos do Overleaf para local"
 	@echo "  upload PATH_ARG=... - Sobe um diretório ou zip como novo projeto no Overleaf"
 	@echo "  upload-template  - Sobe o Template padrão para o Overleaf"
-	@echo "  install          - Instala as dependências e configura o ambiente"
-	@echo "  setup            - Configura o ambiente (cria .env e instala dependências)"
+	@echo "  setup            - Configura o ambiente (cria .env com valores do sistema)"
+	@echo "  auto-sync        - Instala hook de pre-push para sincronizar antes de cada push"
 
 up:
 	docker compose up -d
@@ -42,13 +42,8 @@ upload:
 upload-template:
 	docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template --name "Template TCC CesarSchool"
 
-install:
-	bash scripts/install.sh
-
 setup:
-	@if [ ! -f .env ]; then cp .env.example .env && echo ".env criado — preencha com suas credenciais antes de continuar."; \
-	else echo ".env já existe, pulando."; fi
-	@sed -i "s/^DOCKER_UID=.*/DOCKER_UID=$$(id -u)/" .env
-	@sed -i "s/^DOCKER_GID=.*/DOCKER_GID=$$(id -g)/" .env
-	@echo "DOCKER_UID/GID configurados para $$(id -u):$$(id -g)"
-	bash scripts/install.sh
+	bash scripts/setup-env.sh
+
+auto-sync:
+	bash scripts/setup-auto-sync.sh
