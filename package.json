@@ -1,0 +1,24 @@
+{
+  "name": "create-overleaf-local",
+  "version": "1.0.0",
+  "description": "Scaffold a local Overleaf CE project with Docker Compose",
+  "license": "MIT",
+  "bin": {
+    "create-overleaf-local": "bin/create.js"
+  },
+  "files": [
+    "bin/",
+    "docker/",
+    "config/",
+    "scripts/",
+    "Makefile",
+    "docker-compose.yml",
+    ".env.example",
+    "README.md",
+    ".gitignore",
+    "Template/"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

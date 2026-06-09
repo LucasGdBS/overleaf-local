@@ -2,6 +2,25 @@
 
 Overleaf Community Edition rodando localmente via Docker, com sync automático dos projetos para o repositório git. Suporta AMD64 e ARM64 (incluindo Apple Silicon).
 
+## Quick Start (via npx)
+
+> Requer Node.js 18+ e Docker instalados.
+
+```bash
+npx create-overleaf-local meu-projeto
+cd meu-projeto
+make build && make up
+make logs   # mostra a URL de ativação do admin
+```
+
+Com o template TCC CesarSchool incluso:
+
+```bash
+npx create-overleaf-local meu-tcc --template cesarschool
+```
+
+---
+
 ## Pré-requisitos
 
 - Docker e Docker Compose
@@ -17,6 +36,7 @@ make setup
 ```
 
 Cria o `.env` a partir do exemplo e preenche automaticamente:
+
 - `DOCKER_UID` / `DOCKER_GID` com o usuário atual
 - `DOCKER_PLATFORM` com a arquitetura da máquina (`linux/amd64` ou `linux/arm64`)
 
@@ -45,7 +65,7 @@ make logs
 
 A saída vai conter algo como:
 
-```
+```link
 http://localhost/user/activate?token=...&user_id=...
 ```
 
@@ -111,25 +131,25 @@ docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template/Temp
 
 ## Comandos disponíveis
 
-| Comando                        | O que faz                                                           |
-| ------------------------------ | ------------------------------------------------------------------- |
-| `make setup`                   | Cria `.env` e configura UID, GID e plataforma automaticamente       |
-| `make push-sync`               | Instala hook de pre-push para sincronizar antes de cada push        |
-| `make up`                      | Sobe todos os containers em background                              |
-| `make down`                    | Para e remove os containers                                         |
-| `make restart`                 | Reinicia os containers                                              |
-| `make build`                   | Reconstrói as imagens                                               |
-| `make logs`                    | Acompanha os logs do Overleaf                                       |
-| `make logs-sync`               | Acompanha os logs do serviço de sync                                |
-| `make sync`                    | Executa o sync manualmente                                          |
-| `make upload PATH_ARG=<path>`  | Sobe um diretório ou zip como novo projeto no Overleaf              |
-| `make upload-template`         | Sobe o Template padrão para o Overleaf                              |
+| Comando                       | O que faz                                                     |
+| ----------------------------- | ------------------------------------------------------------- |
+| `make setup`                  | Cria `.env` e configura UID, GID e plataforma automaticamente |
+| `make push-sync`              | Instala hook de pre-push para sincronizar antes de cada push  |
+| `make up`                     | Sobe todos os containers em background                        |
+| `make down`                   | Para e remove os containers                                   |
+| `make restart`                | Reinicia os containers                                        |
+| `make build`                  | Reconstrói as imagens                                         |
+| `make logs`                   | Acompanha os logs do Overleaf                                 |
+| `make logs-sync`              | Acompanha os logs do serviço de sync                          |
+| `make sync`                   | Executa o sync manualmente                                    |
+| `make upload PATH_ARG=<path>` | Sobe um diretório ou zip como novo projeto no Overleaf        |
+| `make upload-template`        | Sobe o Template padrão para o Overleaf                        |
 
 ---
 
 ## Estrutura do repositório
 
-```
+```yaml
 ├── docker/
 │   ├── sharelatex/         # Imagem do Overleaf com TexLive em português
 │   └── sync/               # Container de sync (Python + git + crond)
