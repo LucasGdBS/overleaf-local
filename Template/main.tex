@@ -103,6 +103,41 @@
 \usepackage{multirow}
 \usepackage{caption}
 \usepackage{subcaption}
+\captionsetup{font=footnotesize, labelfont=footnotesize}  % legendas em 10pts (ABNT)
+
+
+% --- CRIAÇÃO DO AMBIENTE PARA QUADROS ---
+% Uso:
+%   \begin{quadro}[H]
+%     \caption{Título do quadro}
+%     \label{qdr:meu-quadro}
+%     \begin{tabular}{|l|l|}
+%       \hline
+%       Coluna A & Coluna B \\ \hline
+%       ...      & ...      \\ \hline
+%     \end{tabular}
+%     \fonte{Elaboração própria}
+%   \end{quadro}
+%
+% Diferença entre Quadro e Tabela (ABNT):
+%   - Quadro: bordas fechadas em todos os lados, conteúdo textual/qualitativo
+%   - Tabela: bordas abertas nas laterais, conteúdo numérico/quantitativo
+%
+% Para referenciar: \cref{qdr:meu-quadro} → "Quadro 1"
+% Para listar:      \listofquadros (adicione em pretextual/listas_siglas.tex)
+\newcommand{\quadroname}{Quadro}
+\newcommand{\listofquadrosname}{Lista de Quadros}
+
+\floatstyle{plaintop}
+\newfloat{quadro}{loq}{\quadroname}
+\floatstyle{plain}
+\newlistof{listofquadros}{loq}{\listofquadrosname}
+\newlistentry{quadro}{loq}{0}
+
+\counterwithout{quadro}{chapter}
+\renewcommand{\thequadro}{\arabic{quadro}}
+\setfloatadjustment{quadro}{\centering}
+\captionsetup[quadro]{name=Quadro}
 
 % --- CORES ---
 \usepackage{xcolor}
@@ -164,6 +199,7 @@
 \usepackage{cleveref}
 \crefname{figure}{Figura}{Figuras}
 \crefname{table}{Tabela}{Tabelas}
+\crefname{quadro}{Quadro}{Quadros}
 \crefname{listing}{Código}{Códigos}
 \crefname{chapter}{Capítulo}{Capítulos}
 \crefname{section}{Seção}{Seções}
@@ -243,6 +279,11 @@
 % TODO: Nome do departamento ou curso (mesmo valor do campo "Nome do Curso" acima).
 %       Exemplo: "Ciência da Computação" ou "Engenharia de Software"
 \departamento{TODO: NOME DO DEPARTAMENTO / CURSO}
+
+% --- CORREÇÕES ABNT NBR 14724 / NBR 6023 ---
+\setlength{\parskip}{0pt}  % sem espaço extra entre parágrafos além do espaçamento 1,5
+\renewcommand{\fonte}[2][\fontename]{\legend{\footnotesize #1: #2}}  % "Fonte:" em 10pts
+
 \begin{document}
 
 \frenchspacing
