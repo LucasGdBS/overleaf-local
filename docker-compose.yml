@@ -33,6 +33,7 @@ services:
     restart: always
     image: mongo:8.0
     container_name: mongo
+    platform: ${DOCKER_PLATFORM:-linux/amd64}
     command: "--replSet overleaf"
     volumes:
       - ./data/mongo:/data/db
@@ -51,6 +52,7 @@ services:
     restart: always
     image: redis:6.2
     container_name: redis
+    platform: ${DOCKER_PLATFORM:-linux/amd64}
     volumes:
       - ./data/redis:/data
 
