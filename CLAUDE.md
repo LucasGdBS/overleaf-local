@@ -24,6 +24,9 @@ make sync                        # download all Overleaf projects → projects/ 
 make upload PATH_ARG=path/to/dir # pack a directory as a new Overleaf project
 make upload-template             # upload Template/ as "Template TCC CesarSchool"
 make cron-sync                   # start the sync container in background (syncs every 30 min)
+make zip PROJECT=name            # download one project as a zip
+make pdf PROJECT=name            # compile and download one project's PDF
+make restart                     # restart all containers
 ```
 
 To run a script directly inside the sync container (e.g. for debugging):
@@ -37,11 +40,11 @@ docker compose run --rm sync python3 /repo/scripts/upload.py /repo/Template --na
 
 ### Docker services (`docker-compose.yml`)
 
-| Service      | Image                               | Role                                                                                                    |
-| ------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `sharelatex` | custom build (`docker/sharelatex/`) | Overleaf CE + TexLive with Portuguese support, port 80                                                  |
-| `mongo`      | `mongo:8.0`                         | MongoDB with replica set (`--replSet overleaf`), initialised by `config/mongodb-init-replica-set.js`    |
-| `redis`      | `redis:6.2`                         | Session/job queue for Overleaf                                                                          |
+| Service      | Image                               | Role                                                                                                                                                                                                  |
+| ------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sharelatex` | custom build (`docker/sharelatex/`) | Overleaf CE + TexLive with Portuguese support, port 80                                                                                                                                                |
+| `mongo`      | `mongo:8.0`                         | MongoDB with replica set (`--replSet overleaf`), initialised by `config/mongodb-init-replica-set.js`                                                                                                  |
+| `redis`      | `redis:6.2`                         | Session/job queue for Overleaf                                                                                                                                                                        |
 | `sync`       | custom build (`docker/sync/`)       | Python Alpine container; mounts the whole repo at `/repo`, runs `sync.py` every 30 min via a shell loop. Uses Docker Compose profile `cron` — **not started by `make up`**, only by `make cron-sync`. |
 
 The `sync` container (when started via `make cron-sync`) starts only after `sharelatex` passes its healthcheck (`curl /login`). One-off commands like `make sync` and `make upload` use `docker compose run --rm sync` and don't require the container to be running.
@@ -58,6 +61,13 @@ The `sync` container (when started via `make cron-sync`) starts only after `shar
 ### Upload flow (`scripts/upload.py`)
 
 Same authentication pattern. Packs a directory into a zip (files at root level, no wrapper directory), then POSTs to `/project/new/upload` with CSRF token and `multipart/form-data`.
+
+### Zip / PDF download flow (`scripts/zip_project.py`, `scripts/pdf_project.py`)
+
+Same auth pattern as sync/upload, plus fuzzy project-name matching (exact match wins; unique partial match otherwise; ambiguous partial match errors listing candidates).
+
+- `zip_project.py`: GETs `/project/<id>/download/zip` and streams it to `<ProjectName>.zip` at repo root.
+- `pdf_project.py`: POSTs to `/project/<id>/compile` first, then reads the returned `outputFiles` for the PDF entry's `url` (falling back to a constructed `/project/<id>/output/output.pdf?build=...` URL), and streams that to `<ProjectName>.pdf`.
 
 ### Key env vars (`.env`)
 
