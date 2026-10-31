@@ -3,7 +3,6 @@
 
 import os
 import sys
-import uuid
 import zipfile
 import tempfile
 import re
@@ -98,13 +97,7 @@ def upload_zip(session, base_url, zip_path: Path, project_name: str):
         resp = session.post(
             f"{base_url}/project/new/upload",
             files={"qqfile": (zip_filename, f, "application/zip")},
-            data={
-                "_csrf": csrf,
-                "name": project_name,
-                "qquuid": str(uuid.uuid4()),
-                "qqfilename": zip_filename,
-                "qqtotalfilesize": file_size,
-            },
+            data={"name": project_name},
             headers={"X-CSRF-Token": csrf} if csrf else {},
             timeout=120,
         )

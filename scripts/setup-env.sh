@@ -39,3 +39,10 @@ esac
 
 sed_inplace "s|^DOCKER_PLATFORM=.*|DOCKER_PLATFORM=$PLATFORM|" "$ENV_FILE"
 echo "DOCKER_PLATFORM configurado para $PLATFORM ($ARCH)"
+
+# Generate only once: regenerating invalidates invite tokens already stored in the database
+if ! grep -q "^OVERLEAF_INVITE_TOKEN_SECRET=." "$ENV_FILE"; then
+    sed_inplace "/^OVERLEAF_INVITE_TOKEN_SECRET=/d" "$ENV_FILE"
+    echo "OVERLEAF_INVITE_TOKEN_SECRET=$(openssl rand -base64 32)" >> "$ENV_FILE"
+    echo "OVERLEAF_INVITE_TOKEN_SECRET gerado"
+fi
